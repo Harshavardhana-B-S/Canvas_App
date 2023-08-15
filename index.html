@@ -2,9 +2,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="style.css">
     <title>canvas_app</title>
 </head>
 <body>
-    <h1>Hello world</h1>
+    <div class="menu-cont">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="options-cont">
+        <img class="pencil" src="assests/Pencil.svg">
+        <img class="eraser" src="assests/Eraser.svg">
+        <img class="download" src="assests/Download.svg">
+        <img class="upload" src="assests/Upload.svg">
+        <img class="sticky" src="assests/StickyNote.svg">
+        <img class="redo" src="assests/Redo.svg">
+        <img class="undo" src="assests/Undo.svg">
+    </div>
+
+    <div class="pencil-options-cont">
+        <div class="pencil-width-cont">
+            <input type="range" min="2" max="10" value="3" >
+        </div>
+
+        <div class="pencil-color-cont">
+            <div class="black pencil-color"></div>
+            <div class="red pencil-color"></div>
+            <div class="blue pencil-color"></div>
+        </div>
+    </div>
+
+
+    <script src="app.js"></script>
 </body>
 </html>
