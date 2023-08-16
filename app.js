@@ -5,6 +5,10 @@ let pencil=document.querySelector(".pencil");
 let menu_flag=true;
 let pencil_flag=true;
 
+let eraser_flag=true;
+let eraser=document.querySelector(".eraser");
+let eraser_options_bar=document.querySelector(".eraser-option-cont");
+
 // let menu_flag=true;
 menu.addEventListener("click",(e)=>{
     menu_flag = !menu_flag;
@@ -28,6 +32,7 @@ function closeTools(){
     options_bar.style.display = "none";
 
     pencil_options_bar.style.display="none";
+    eraser_options_bar.style.display="none";
 }
 
 pencil.addEventListener("click",(e)=>{
@@ -38,3 +43,13 @@ pencil.addEventListener("click",(e)=>{
     else 
     pencil_options_bar.style.display="none";
 })
+
+eraser.addEventListener("click",(e)=>{
+    eraser_flag = !eraser_flag;
+
+    if(eraser_flag)
+    eraser_options_bar.style.display="block";
+    else 
+    eraser_options_bar.style.display="none";
+})
+

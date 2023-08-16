@@ -32,9 +32,28 @@ body{
 .pencil{
     cursor: pointer;
 }
+.eraser-option-cont{
+    height: 2rem;
+    width: 7rem;
+    background-color: #f1f2f6;
+    position: absolute;
+    top: 6.5rem;
+    left: 33vw;
+    border-radius: 3px;
+    display: none;
+    cursor: pointer;
+}
+.eraser-option-cont>input{
+    width: 80%;
+   margin-left: 8px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+
+}
 .pencil-options-cont{
     height: 5rem;
-    width: 10rem;
+    width: 7rem;
     background-color: #f1f2f6;
     position: absolute;
     top: 6.5rem;
@@ -49,6 +68,10 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.pencil-width-cont input{
+    width: 80%;
 }
 .pencil-color-cont{
     /* background-color: yellow; */
