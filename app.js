@@ -13,6 +13,8 @@ let eraser_options_bar=document.querySelector(".eraser-option-cont");
 let sticky_text_flag=true;
 let sticky=document.querySelector(".sticky");
 
+let upload=document.querySelector(".upload");
+
 // let menu_flag=true;
 menu.addEventListener("click",(e)=>{
     menu_flag = !menu_flag;
@@ -94,6 +96,52 @@ sticky.addEventListener("click",(e)=>{
 })
 
 
+
+
+
+upload.addEventListener("click",(e)=>{
+    // Open file explorer
+    let input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.click();
+
+    input.addEventListener("change", (e) => {
+        let file = input.files[0];
+        let url = URL.createObjectURL(file);
+
+        let sticky_template = `
+        <div class="sticky-header">
+            <div class="minimize-sticky"></div>
+            <div class="close-sticky"></div>
+    </div>
+        <div class="text-area">
+            <img  src="${url}"/>
+        </div>
+        `;
+
+    let stickyCont = document.createElement("div");
+    
+    stickyCont.setAttribute("class", "sticky-cont");
+    stickyCont.innerHTML = sticky_template;
+    document.body.appendChild(stickyCont);
+
+
+    let minimize = stickyCont.querySelector(".minimize-sticky");
+    let remove = stickyCont.querySelector(".close-sticky");
+    let textarea=stickyCont.querySelector(".text-area");
+
+    notesActions(stickyCont,remove,minimize,textarea);
+
+    stickyCont.onmousedown = function (event) {
+        dragAndDrop(stickyCont, event);
+    };
+
+    stickyCont.ondragstart = function () {
+        return false;
+    };
+        
+    })
+})
 
 function notesActions(sticky_cont,remove,minimize,textarea){
 

@@ -96,8 +96,8 @@ body{
     background-color: blue;
 }
 
+
 .sticky-cont{
-    /* border: 1px solid black; */
     width: 250px;
     height: 220px;
     position: absolute;
@@ -115,10 +115,8 @@ body{
 }
 
 .text-area{
-    /* border: 1px solid green;
     width: 250px;
-    height: 190px; */
-    height: calc( 100% - 2rem );
+    height: 190px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -146,3 +144,10 @@ body{
     height: 20px;
     margin-right: 20px;
 }
+
+.text-area>img {
+    height: 100%;
+    width: 100%;
+}
+
+
