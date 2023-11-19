@@ -95,3 +95,54 @@ body{
 .blue {
     background-color: blue;
 }
+
+.sticky-cont{
+    /* border: 1px solid black; */
+    width: 250px;
+    height: 220px;
+    position: absolute;
+    top: 15rem;
+    left: 10rem;
+}
+
+.sticky-header{
+    background-color: #f1f2f6;
+    width: 250px;
+    height: 30px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.text-area{
+    /* border: 1px solid green;
+    width: 250px;
+    height: 190px; */
+    height: calc( 100% - 2rem );
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.text-area >textarea{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    resize: none;
+}
+
+.minimize-sticky{
+    background: green;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+    
+}
+
+.close-sticky{
+    background: crimson;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+}

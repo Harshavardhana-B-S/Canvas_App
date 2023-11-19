@@ -1,5 +1,6 @@
 let menu=document.querySelector(".menu-cont");
 let options_bar=document.querySelector(".options-cont");
+
 let pencil_options_bar=document.querySelector(".pencil-options-cont");
 let pencil=document.querySelector(".pencil");
 let menu_flag=true;
@@ -8,6 +9,9 @@ let pencil_flag=true;
 let eraser_flag=true;
 let eraser=document.querySelector(".eraser");
 let eraser_options_bar=document.querySelector(".eraser-option-cont");
+
+let sticky_text_flag=true;
+let sticky=document.querySelector(".sticky");
 
 // let menu_flag=true;
 menu.addEventListener("click",(e)=>{
@@ -53,3 +57,49 @@ eraser.addEventListener("click",(e)=>{
     eraser_options_bar.style.display="none";
 })
 
+
+sticky.addEventListener("click",(e)=>{
+
+    let sticky_template=
+    `
+    <div class="sticky-header">
+            <div class="minimize-sticky"></div>
+            <div class="close-sticky"></div>
+    </div>
+    <div class="text-area">
+            <textarea></textarea>
+    </div> 
+    `;
+
+    let stickyCont = document.createElement("div");
+    
+    stickyCont.setAttribute("class", "sticky-cont");
+    stickyCont.innerHTML = sticky_template;
+    document.body.appendChild(stickyCont);
+
+
+    let minimize = stickyCont.querySelector(".minimize-sticky");
+    let remove = stickyCont.querySelector(".close-sticky");
+    let textarea=stickyCont.querySelector(".text-area");
+
+    notesActions(stickyCont,remove,minimize,textarea);
+})
+
+
+
+function notesActions(sticky_cont,remove,minimize,textarea){
+
+    remove.addEventListener("click",(e)=>{
+        sticky_cont.remove();
+    });
+
+    minimize.addEventListener("click",(e)=>{
+        sticky_text_flag = !sticky_text_flag;
+    if(sticky_text_flag)
+    textarea.style.display="none";
+    else
+    textarea.style.display="block";
+    
+    });
+ 
+}
