@@ -72,27 +72,8 @@ sticky.addEventListener("click",(e)=>{
             <textarea></textarea>
     </div> 
     `;
-
-    let stickyCont = document.createElement("div");
-    
-    stickyCont.setAttribute("class", "sticky-cont");
-    stickyCont.innerHTML = sticky_template;
-    document.body.appendChild(stickyCont);
-
-
-    let minimize = stickyCont.querySelector(".minimize-sticky");
-    let remove = stickyCont.querySelector(".close-sticky");
-    let textarea=stickyCont.querySelector(".text-area");
-
-    notesActions(stickyCont,remove,minimize,textarea);
-
-    stickyCont.onmousedown = function (event) {
-        dragAndDrop(stickyCont, event);
-    };
-
-    stickyCont.ondragstart = function () {
-        return false;
-    };
+    createStickyNote(sticky_template);
+   
 })
 
 
@@ -113,12 +94,18 @@ upload.addEventListener("click",(e)=>{
         <div class="sticky-header">
             <div class="minimize-sticky"></div>
             <div class="close-sticky"></div>
-    </div>
+        </div>
         <div class="text-area">
             <img  src="${url}"/>
         </div>
         `;
 
+        createStickyNote(sticky_template);
+
+    })
+})
+
+function createStickyNote(sticky_template){
     let stickyCont = document.createElement("div");
     
     stickyCont.setAttribute("class", "sticky-cont");
@@ -139,9 +126,8 @@ upload.addEventListener("click",(e)=>{
     stickyCont.ondragstart = function () {
         return false;
     };
-        
-    })
-})
+
+}
 
 function notesActions(sticky_cont,remove,minimize,textarea){
 
