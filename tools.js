@@ -3,21 +3,52 @@ canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let mouseDownFlag=false;
-let pencilColor=document.querySelectorAll(".pencil-color");
+let pencilColorEle=document.querySelectorAll(".pencil-color");
+let pencilWidthELe=document.querySelector(".pencil-width");
+
+let eraserWidthElem=document.querySelector(".eraserWidth");
+
+let penColor="Red";
+let penWidth=3;
+let eraserColor="White";
+let eraserWidth="3";
+
+let downloadElm=document.querySelector(".download");
+
 //API
+
 let tool=canvas.getContext("2d");
-tool.strokeStyle="Blue";
-tool.lineWidth="3";
 
-// tool.beginPath();
-// tool.moveTo(10,10);
-// tool.lineTo(200,250);
-// tool.stroke();
 
-// tool.beginPath();
-// tool.moveTo(200,250);
-// tool.lineTo(310,250);
-// tool.stroke();
+pencilColorEle.forEach((colorEle)=>{
+   colorEle.addEventListener("click",(e)=>{
+     penColor=colorEle.classList[0];
+
+    tool.strokeStyle=penColor;
+   })
+})
+
+pencilWidthELe.addEventListener("input",(e)=>{
+    penWidth=pencilWidthELe.value;  
+    tool.lineWidth=penWidth;
+})
+
+eraserWidthElem.addEventListener("input",(e)=>{
+    eraserWidth=eraserWidthElem.value;
+    tool.lineWidth=eraserWidth;
+})
+
+eraser.addEventListener("click",(e)=>{
+    if(eraser_flag){
+        tool.strokeStyle=eraserColor;
+        tool.lineWidth=eraserWidth;
+    }else{
+        tool.strokeStyle=penColor;
+        tool.lineWidth=penWidth;
+
+    }
+})
+
 
 canvas.addEventListener("mousedown",(e)=>{
     mouseDownFlag=true;
