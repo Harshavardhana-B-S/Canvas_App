@@ -80,3 +80,12 @@ function drawStroke(strokeObj){
     tool.lineTo(strokeObj.x,strokeObj.y);
     tool.stroke();
 }
+
+downloadElm.addEventListener("click",(e)=>{
+    let url=canvas.toDataURL();
+
+    let a=document.createElement("a");
+    a.href=url;
+    a.download="board.jpg";
+    a.click();
+})
