@@ -15,6 +15,13 @@ let eraserWidth="3";
 
 let downloadElm=document.querySelector(".download");
 
+
+let undoRedo=[];
+let redo=document.querySelector(".redo");
+let undo=document.querySelector(".undo");
+let track=0;
+
+
 //API
 
 let tool=canvas.getContext("2d");
@@ -35,7 +42,7 @@ pencilWidthELe.addEventListener("input",(e)=>{
 
 eraserWidthElem.addEventListener("input",(e)=>{
     eraserWidth=eraserWidthElem.value;
-    tool.lineWidth=eraserWidth;
+    tool.lineWidth=eraserWidth+2;
 })
 
 eraser.addEventListener("click",(e)=>{
@@ -69,6 +76,10 @@ canvas.addEventListener("mousemove",(e)=>{
 
 canvas.addEventListener("mouseup",(e)=>{
     mouseDownFlag=false;
+
+    let url = canvas.toDataURL();
+    undoRedo.push(url);
+    track = undoRedo.length-1;
 })
 
 function beginPath(strokeObj){
@@ -89,3 +100,44 @@ downloadElm.addEventListener("click",(e)=>{
     a.download="board.jpg";
     a.click();
 })
+
+redo.addEventListener("click",(e)=>{
+    if(track<undoRedo.length-1)
+    track++;
+
+    let data={
+        trackValue:track,
+        undoRedo
+    };
+
+   
+    undoRedoFeature(data);
+
+})
+
+undo.addEventListener("click",(e)=>{
+    if(track>0)
+    track--;
+
+    let data={
+        trackValue:track,
+        undoRedo
+    };
+   
+
+    undoRedoFeature(data);
+
+})
+
+function undoRedoFeature(trackObj){
+
+    track=trackObj.trackValue;
+    undoRedo=trackObj.undoRedo;
+
+    let url = undoRedo[track];
+    let img = new Image(); 
+    img.src = url;
+    img.onload = (e) => {
+        tool.drawImage(img, 0, 0, canvas.width, canvas.height);
+    }
+}
