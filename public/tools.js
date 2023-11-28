@@ -59,18 +59,29 @@ eraser.addEventListener("click",(e)=>{
 
 canvas.addEventListener("mousedown",(e)=>{
     mouseDownFlag=true;
-    beginPath({
+    // beginPath({
+    //     x:e.clientX,
+    //     y:e.clientY,
+    // })
+    let data={
         x:e.clientX,
         y:e.clientY,
-    })
+    }
+    socket.emit("beginPath",data);
 })
 
 canvas.addEventListener("mousemove",(e)=>{
     if(mouseDownFlag){
-        drawStroke({
+
+        let data={
             x:e.clientX,
             y:e.clientY,
-        })
+        }
+        socket.emit("drawStroke",data);
+        // drawStroke({
+        //     x:e.clientX,
+        //     y:e.clientY,
+        // })
     }
 })
 
@@ -110,8 +121,8 @@ redo.addEventListener("click",(e)=>{
         undoRedo
     };
 
-   
-    undoRedoFeature(data);
+    socket.emit("undoRedoFeature",data);
+    // undoRedoFeature(data);
 
 })
 
@@ -123,9 +134,9 @@ undo.addEventListener("click",(e)=>{
         trackValue:track,
         undoRedo
     };
-   
+   socket.emit("undoRedoFeature",data);
 
-    undoRedoFeature(data);
+    // undoRedoFeature(data);
 
 })
 
@@ -141,3 +152,15 @@ function undoRedoFeature(trackObj){
         tool.drawImage(img, 0, 0, canvas.width, canvas.height);
     }
 }
+
+socket.on("beginPath",(data)=>{
+    beginPath(data);
+})
+
+socket.on("drawStroke",(data)=>{
+    drawStroke(data);
+})
+
+socket.on("undoRedoFeature",(data)=>{
+    undoRedoFeature(data);
+})
