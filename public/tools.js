@@ -27,34 +27,7 @@ let track=0;
 let tool=canvas.getContext("2d");
 
 
-pencilColorEle.forEach((colorEle)=>{
-   colorEle.addEventListener("click",(e)=>{
-     penColor=colorEle.classList[0];
 
-    tool.strokeStyle=penColor;
-   })
-})
-
-pencilWidthELe.addEventListener("input",(e)=>{
-    penWidth=pencilWidthELe.value;  
-    tool.lineWidth=penWidth;
-})
-
-eraserWidthElem.addEventListener("input",(e)=>{
-    eraserWidth=eraserWidthElem.value;
-    tool.lineWidth=eraserWidth+2;
-})
-
-eraser.addEventListener("click",(e)=>{
-    if(eraser_flag){
-        tool.strokeStyle=eraserColor;
-        tool.lineWidth=eraserWidth;
-    }else{
-        tool.strokeStyle=penColor;
-        tool.lineWidth=penWidth;
-
-    }
-})
 
 
 canvas.addEventListener("mousedown",(e)=>{
@@ -76,12 +49,11 @@ canvas.addEventListener("mousemove",(e)=>{
         let data={
             x:e.clientX,
             y:e.clientY,
+            color: eraser_flag ? eraserColor : penColor,
+            width: eraser_flag ? eraserWidth+1: penWidth
         }
         socket.emit("drawStroke",data);
-        // drawStroke({
-        //     x:e.clientX,
-        //     y:e.clientY,
-        // })
+       
     }
 })
 
@@ -99,9 +71,40 @@ function beginPath(strokeObj){
 }
 
 function drawStroke(strokeObj){
+    tool.strokeStyle = strokeObj.color;
+    tool.lineWidth = strokeObj.width;
     tool.lineTo(strokeObj.x,strokeObj.y);
     tool.stroke();
 }
+
+pencilColorEle.forEach((colorEle)=>{
+    colorEle.addEventListener("click",(e)=>{
+      penColor=colorEle.classList[0];
+ 
+     tool.strokeStyle=penColor;
+    })
+ })
+ 
+ pencilWidthELe.addEventListener("input",(e)=>{
+     penWidth=pencilWidthELe.value;  
+     tool.lineWidth=penWidth;
+ })
+ 
+ eraserWidthElem.addEventListener("input",(e)=>{
+     eraserWidth=eraserWidthElem.value;
+     tool.lineWidth=eraserWidth+2;
+ })
+ 
+ eraser.addEventListener("click",(e)=>{
+     if(eraser_flag){
+         tool.strokeStyle=eraserColor;
+         tool.lineWidth=eraserWidth;
+     }else{
+         tool.strokeStyle=penColor;
+         tool.lineWidth=penWidth;
+ 
+     }
+ })
 
 downloadElm.addEventListener("click",(e)=>{
     let url=canvas.toDataURL();
@@ -121,7 +124,7 @@ redo.addEventListener("click",(e)=>{
         undoRedo
     };
 
-    socket.emit("undoRedoFeature",data);
+    socket.emit("undoRedo",data);
     // undoRedoFeature(data);
 
 })
@@ -134,7 +137,7 @@ undo.addEventListener("click",(e)=>{
         trackValue:track,
         undoRedo
     };
-   socket.emit("undoRedoFeature",data);
+   socket.emit("undoRedo",data);
 
     // undoRedoFeature(data);
 
@@ -161,6 +164,6 @@ socket.on("drawStroke",(data)=>{
     drawStroke(data);
 })
 
-socket.on("undoRedoFeature",(data)=>{
+socket.on("undoRedo",(data)=>{
     undoRedoFeature(data);
 })

@@ -3,8 +3,8 @@ const socket=require("socket.io");
 
 const app=express();
 
-// app.use(express.static("public"));
-app.use(express.static(__dirname + "/public"));
+app.use(express.static("public"));
+// app.use(express.static(__dirname + "/public"));
 
 let port=3000;
 let server=app.listen(port,()=>{
@@ -18,13 +18,13 @@ io.on("connection",(socket)=>{
     console.log("Made Socket Connection");
 
     socket.on("beginPath",(data)=>{
-          io.emit("beginPath",data);
+          io.sockets.emit("beginPath",data);
     })
 
     socket.on("drawStroke",(data)=>{
-        io.emit("drawStroke",data);
+        io.sockets.emit("drawStroke",data);
   })
-  socket.on("undoRedoFeature", (data) => {
-    undoRedoFeature(data);
+  socket.on("undoRedo", (data) => {
+    io.sockets.emit("undoRedo",data);
 })
 })

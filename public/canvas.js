@@ -4,9 +4,9 @@ let options_bar=document.querySelector(".options-cont");
 let pencil_options_bar=document.querySelector(".pencil-options-cont");
 let pencil=document.querySelector(".pencil");
 let menu_flag=true;
-let pencil_flag=true;
+let pencil_flag=false;
 
-let eraser_flag=true;
+let eraser_flag=false;
 let eraser=document.querySelector(".eraser");
 let eraser_options_bar=document.querySelector(".eraser-option-cont");
 
